@@ -1,0 +1,23 @@
+.btn {
+  @apply font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150;
+}
+
+.btn-primary {
+  @apply bg-purple-500 text-white;
+}
+
+.btn-primary:active {
+  @apply bg-purple-600;
+}
+
+.input-text {
+  @apply px-3 py-3 placeholder-gray-400 text-gray-600 relative bg-white rounded text-sm border border-gray-400 outline-none focus:outline-none;
+}
+
+select.form-input {
+  @apply rounded bottom-1;
+}
+
+option {
+  @apply px-3 py-3;
+}
