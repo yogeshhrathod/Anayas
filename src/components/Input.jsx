@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { api } from "../api";
 import { API_TYPES } from "../constants";
 import { useHandleInput } from "../utils/utilHooks";
+import Editor from "../components/editor/Editor";
 export default function Input() {
   const methodType = useHandleInput(API_TYPES.GET.color);
   const apiUrl = useHandleInput("");
+  const [response, setResponse] = useState("");
 
   const sendRequest = async (e) => {
     e.preventDefault();
-    const data = await api(methodType.value, apiUrl.value, {});
-    console.log(data);
+    const { data } = await api(methodType.value, apiUrl.value, {});
+    setResponse(data);
   };
 
   return (
