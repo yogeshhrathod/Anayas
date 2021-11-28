@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Collection from "./Collection";
-import Input from "./Input";
-import Editor from "./editor/Editor";
+import { BrowserRouter } from "react-router-dom";
+import RequestEngine from "./RequestEngine";
+
 export default function Layout() {
+  const [apiList, setApiList] = useState([]);
+  const list = { apiList, setApiList };
   return (
-    <div className="flex">
-      <div className="w-1/4">
-        <Collection />
-      </div>
-      <div className="inline-block w-3/4">
-        <div className="px-3 py-3 bg-gray-900">
-          <Input />
+    <BrowserRouter>
+      <div className="flex">
+        <div className="w-1/4">
+          <Collection {...list} />
         </div>
-        <Editor readOnly={true} />
+        <div className="inline-block w-3/4">
+          <RequestEngine {...list} />
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }

@@ -1,21 +1,10 @@
-import React, { useState } from "react";
-import { api } from "../api";
 import { API_TYPES } from "../constants";
 import { useHandleInput } from "../utils/utilHooks";
-import Editor from "../components/editor/Editor";
-export default function Input() {
+export default function Input({ item, sendRequest }) {
   const methodType = useHandleInput(API_TYPES.GET.color);
-  const apiUrl = useHandleInput("");
-  const [response, setResponse] = useState("");
-
-  const sendRequest = async (e) => {
-    e.preventDefault();
-    const { data } = await api(methodType.value, apiUrl.value, {});
-    setResponse(data);
-  };
-
+  const apiUrl = useHandleInput(item?.url || "");
   return (
-    <form onSubmit={sendRequest}>
+    <form onSubmit={(e) => sendRequest(e, methodType, apiUrl)}>
       <div className="flex w-full">
         <select
           className="form-input"

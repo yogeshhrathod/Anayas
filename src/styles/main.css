@@ -6,8 +6,16 @@
   @apply bg-purple-500 text-white;
 }
 
+.btn-secondary {
+  @apply bg-yellow-500 text-white;
+}
+
 .btn-primary:active {
   @apply bg-purple-600;
+}
+
+.small-btn {
+  @apply font-bold uppercase text-sm rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear;
 }
 
 .input-text {
