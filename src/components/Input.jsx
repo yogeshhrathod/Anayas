@@ -7,7 +7,7 @@ export default function Input({ item, sendRequest }) {
     <form onSubmit={(e) => sendRequest(e, methodType, apiUrl)}>
       <div className="flex w-full">
         <select
-          className="form-input"
+          className="form-input bg-black text-white"
           name="rest-types"
           id="rest-types"
           {...methodType}
@@ -18,7 +18,11 @@ export default function Input({ item, sendRequest }) {
             </option>
           ))}
         </select>
-        <input className="form-input w-full" type="text" {...apiUrl} />
+        <input
+          className="bg-gray-900 form-input text-white w-full"
+          type="text"
+          {...apiUrl}
+        />
         <button className="mb-0 btn btn-primary">SEND</button>
       </div>
     </form>

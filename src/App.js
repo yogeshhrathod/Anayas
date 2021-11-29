@@ -1,4 +1,3 @@
-import "./App.css";
 import "./styles/main.css";
 import Layout from "./components/Layout";
 require("codemirror/mode/xml/xml");

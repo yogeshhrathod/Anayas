@@ -5,7 +5,7 @@ import { onEnter } from "../utils/common";
 import { Link } from "react-router-dom";
 
 export default function ListItem({ item, index, removeApi }) {
-  const name = useHandleInput(item?.name ?? "New API");
+  const name = useHandleInput(item?.name ?? "New Request");
   const [edit, setEdit] = useState(false);
   const ref = useRef(null);
 

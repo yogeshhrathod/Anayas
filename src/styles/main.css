@@ -1,3 +1,6 @@
+body{
+  @apply bg-gray-900
+}
 .btn {
   @apply font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150;
 }

@@ -6,11 +6,12 @@ export default function Tabs({ tabs }) {
 
   return (
     <div>
-      <div className="flex mx-2 mt-2 rounded-md bg-gray-100 relative tabs">
+      <div className="flex mx-2 rounded-md bg-gray-800 relative tabs">
         {tabs.map((item, index) => {
           return (
             <button
-              className={`tabs-item w-full relative z-10 py-1 my-2 ml-2 text-center rounded-md  text-sm cursor-pointer select-none focus:outline-none ${
+              key={index}
+              className={`tabs-item w-full relative z-10 py-1 my-2 ml-2 text-center rounded-md  text-sm cursor-pointer select-none focus:outline-none text-white ${
                 index === selectedTab ? "active" : ""
               }`}
               onClick={() => setSelectedTab(index)}
@@ -19,7 +20,9 @@ export default function Tabs({ tabs }) {
             </button>
           );
         })}
-        <span className={`tab-item-animate rounded-md bg-white active`}></span>
+        <span
+          className={`tab-item-animate rounded-md bg-purple-500 active`}
+        ></span>
       </div>
       <div>
         {tabs.map((item, index) => {
