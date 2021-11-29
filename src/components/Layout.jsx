@@ -9,7 +9,7 @@ export default function Layout() {
   return (
     <BrowserRouter>
       <div className="flex">
-        <div className="w-1/4">
+        <div className="w-1/4 border-r">
           <Collection {...list} />
         </div>
         <div className="inline-block w-3/4">

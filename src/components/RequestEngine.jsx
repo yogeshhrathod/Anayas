@@ -7,9 +7,9 @@ import Tabs from "./Tabs/index";
 export default function RequestEngine({ apiList }) {
   let apiIndex = useParams();
   const tabsInfo = [
-    { name: "Param", component: <div>Param</div> },
-    { name: "Header", component: <div>Header</div> },
-    { name: "Body", component: <Editor /> },
+    { name: "Param", component: <div key="params">Param</div> },
+    { name: "Header", component: <div key="header">Header</div> },
+    { name: "Body", component: <Editor key="body" /> },
   ];
   const [response, setResponse] = useState();
   const sendRequest = async (e, methodType, apiUrl) => {
