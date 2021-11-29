@@ -1,0 +1,31 @@
+import React, { useState } from "react";
+import "./styles.css";
+
+export default function Tabs({ tabs }) {
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  return (
+    <div>
+      <div className="flex mx-2 mt-2 rounded-md bg-gray-100 relative tabs">
+        {tabs.map((item, index) => {
+          return (
+            <button
+              className={`tabs-item w-full relative z-10 py-1 my-2 ml-2 text-center rounded-md  text-sm cursor-pointer select-none focus:outline-none ${
+                index === selectedTab ? "active" : ""
+              }`}
+              onClick={() => setSelectedTab(index)}
+            >
+              {item.name}
+            </button>
+          );
+        })}
+        <span className={`tab-item-animate rounded-md bg-white active`}></span>
+      </div>
+      <div>
+        {tabs.map((item, index) => {
+          return (selectedTab === index && item.component) || null;
+        })}
+      </div>
+    </div>
+  );
+}
