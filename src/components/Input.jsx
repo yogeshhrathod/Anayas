@@ -7,7 +7,7 @@ export default function Input({ item, sendRequest }) {
     <form onSubmit={(e) => sendRequest(e, methodType, apiUrl)}>
       <div className="flex w-full">
         <select
-          className="form-input bg-black text-white"
+          className="form-input bg-black text-white cursor-pointer"
           name="rest-types"
           id="rest-types"
           {...methodType}
