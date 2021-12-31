@@ -2,9 +2,8 @@ import React, { useState, useRef } from "react";
 import { useHandleInput } from "../utils/utilHooks";
 import { FaTrash, FaCheck, FaPencilAlt } from "react-icons/fa";
 import { onEnter } from "../utils/common";
-import { Link } from "react-router-dom";
 
-export default function ListItem({ item, index, removeApi }) {
+export default function ListItem({ item, index, removeApi, className, clickHandler }) {
   const name = useHandleInput(item?.name ?? "New Request");
   const [edit, setEdit] = useState(false);
   const ref = useRef(null);
@@ -16,7 +15,8 @@ export default function ListItem({ item, index, removeApi }) {
   };
 
   return (
-    <div className="flex w-full px-2 py-1 my-1 mx-1">
+    <div className={`flex w-full px-2 py-1 my-1 hover:bg-red-50 hover:bg-opacity-25`} onClick={clickHandler}>
+      <div className={`inline-block w-2 rounded ${className}`} ></div>
       <div className="w-full text-white">
         {edit ? (
           <input
@@ -24,27 +24,24 @@ export default function ListItem({ item, index, removeApi }) {
             onKeyPress={(e) => onEnter(e, toggleEdit)}
             className="w-full bg-gray-500 outline-none px-2 py-1 rounded"
             {...name}
+            onBlur={()=>setEdit(false)}
           />
         ) : (
-          <Link
-            to={"/" + index}
-            className="w-full px-2 py-1 truncate"
-            onDoubleClick={toggleEdit}
-          >
+          <div className="w-full px-2 py-1 truncate cursor-pointer" onDoubleClick={toggleEdit}>
             {name.value}
-          </Link>
+          </div>
         )}
       </div>
       <div className="flex flex-nowrap text-white">
         <button
           onClick={toggleEdit}
-          className="small-btn  p-1 ml-1 hover:text-blue-600"
+          className="font-bold uppercase text-sm rounded shadow hover:shadow-lg outline-none   p-1 ml-1 hover:text-blue-600"
         >
           {edit ? <FaCheck /> : <FaPencilAlt />}
         </button>
         <button
           onClick={() => removeApi(index)}
-          className="small-btn  p-1 ml-1 hover:text-red-600 "
+          className="font-bold uppercase text-sm rounded shadow hover:shadow-lg outline-none   p-1 ml-1 hover:text-red-600 "
         >
           <FaTrash />
         </button>

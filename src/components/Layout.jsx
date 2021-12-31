@@ -1,21 +1,19 @@
 import React, { useState } from "react";
 import Collection from "./Collection";
-import { BrowserRouter } from "react-router-dom";
 import RequestEngine from "./RequestEngine";
 
 export default function Layout() {
   const [apiList, setApiList] = useState([]);
-  const list = { apiList, setApiList };
+  const [selectedRequest, setSelectedRequest] = useState(null);
+  const props = { apiList, setApiList, selectedRequest, setSelectedRequest };
   return (
-    <BrowserRouter>
-      <div className="flex">
-        <div className="w-1/4 border-r">
-          <Collection {...list} />
-        </div>
-        <div className="inline-block w-3/4">
-          <RequestEngine {...list} />
-        </div>
+    <div className="flex bg-gray-900">
+      <div className="w-1/4 border-r">
+        <Collection {...props} />
       </div>
-    </BrowserRouter>
+      <div className="inline-block w-3/4">
+        { selectedRequest!==null ? <RequestEngine {...props} /> : <div>Select a request</div> }
+      </div>
+    </div>
   );
 }

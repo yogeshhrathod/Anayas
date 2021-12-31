@@ -16,7 +16,7 @@ const config = {
   ],
   headers: { "X-Requested-With": "XMLHttpRequest" },
   data: "",
-  timeout: 1000,
+  timeout: Infinity,
   responseType: "json",
   responseEncoding: "utf8",
   xsrfCookieName: "XSRF-TOKEN",
