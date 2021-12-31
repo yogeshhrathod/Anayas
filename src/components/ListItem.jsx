@@ -15,7 +15,7 @@ export default function ListItem({ item, index, removeApi, className, clickHandl
   };
 
   return (
-    <div className={`flex w-full px-2 py-1 my-1`} onClick={clickHandler}>
+    <div className={`flex w-full px-2 py-1 my-1 hover:bg-red-50 hover:bg-opacity-25`} onClick={clickHandler}>
       <div className={`inline-block w-2 rounded ${className}`} ></div>
       <div className="w-full text-white">
         {edit ? (
@@ -35,13 +35,13 @@ export default function ListItem({ item, index, removeApi, className, clickHandl
       <div className="flex flex-nowrap text-white">
         <button
           onClick={toggleEdit}
-          className="small-btn  p-1 ml-1 hover:text-blue-600"
+          className="font-bold uppercase text-sm rounded shadow hover:shadow-lg outline-none   p-1 ml-1 hover:text-blue-600"
         >
           {edit ? <FaCheck /> : <FaPencilAlt />}
         </button>
         <button
           onClick={() => removeApi(index)}
-          className="small-btn  p-1 ml-1 hover:text-red-600 "
+          className="font-bold uppercase text-sm rounded shadow hover:shadow-lg outline-none   p-1 ml-1 hover:text-red-600 "
         >
           <FaTrash />
         </button>

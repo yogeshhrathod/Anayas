@@ -7,12 +7,12 @@ export default function Layout() {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const props = { apiList, setApiList, selectedRequest, setSelectedRequest };
   return (
-    <div className="flex">
+    <div className="flex bg-gray-900">
       <div className="w-1/4 border-r">
         <Collection {...props} />
       </div>
       <div className="inline-block w-3/4">
-        <RequestEngine {...props} />
+        { selectedRequest!==null ? <RequestEngine {...props} /> : <div>Select a request</div> }
       </div>
     </div>
   );
