@@ -2,6 +2,7 @@
   "name": "anayas",
   "version": "0.1.0",
   "private": true,
+  "main": "electron/main.js",
   "dependencies": {
     "@craco/craco": "^6.4.2",
     "@tailwindcss/forms": "^0.3.4",
@@ -10,6 +11,8 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
     "codemirror": "^5.64.0",
+    "concurrently": "^6.5.1",
+    "electron": "^16.0.5",
     "history": "^5.1.0",
     "pullstate": "^1.23.0",
     "react": "^17.0.2",
@@ -19,13 +22,15 @@
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "react-tabs": "^3.2.3",
+    "wait-on": "^6.0.0",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron:start": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": [
