@@ -1,7 +1,10 @@
 {
   "name": "anayas",
   "version": "0.1.0",
+  "author": "Yogesh Rathod",
+  "description": "Rest client for developers",
   "private": true,
+  "main": "electron/main.js",
   "dependencies": {
     "@craco/craco": "^6.4.2",
     "@tailwindcss/forms": "^0.3.4",
@@ -10,6 +13,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
     "codemirror": "^5.64.0",
+    "electron-is": "^3.0.0",
     "history": "^5.1.0",
     "pullstate": "^1.23.0",
     "react": "^17.0.2",
@@ -24,8 +28,22 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "build-electron": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron:start": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron:build": "npm run build-electron && electron-builder build --publish never"
+  },
+  "homepage": "./",
+  "build": {
+    "appId": "com.yogeshhrathod.anayas",
+    "productName": "Anayas",
+    "files": [
+      "build/**/*",
+      "electron/main.js",
+      "package.json"
+    ],
+    "extends": null
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +66,10 @@
   "devDependencies": {
     "autoprefixer": "^9.8.8",
     "postcss": "^7.0.39",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "concurrently": "^6.0.0",
+    "electron": "^12.0.1",
+    "electron-builder": "^22.10.5",
+    "wait-on": "^5.3.0"
   }
 }
