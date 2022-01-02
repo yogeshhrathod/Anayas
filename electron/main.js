@@ -13,14 +13,19 @@ const createMainWindow = () => {
       nodeIntegration: false
     }
   });
-  
+  const splash = new BrowserWindow({ width: 810, height: 610, transparent: true, frame: false, alwaysOnTop: true });
+  splash.loadURL(`file://${path.join(__dirname, '../build/splash.html')}`);
+
   const startURL = isDev
-  ? 'http://localhost:3000'
-  : `file://${path.join(__dirname, '../build/index.html')}`;
+    ? 'http://localhost:3000'
+    : `file://${path.join(__dirname, '../build/index.html')}`;
 
   mainWindow.loadURL(startURL);
 
-  mainWindow.once('ready-to-show', () => mainWindow.show());
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
+    splash.destroy();
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;

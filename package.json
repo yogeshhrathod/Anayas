@@ -1,6 +1,8 @@
 {
   "name": "anayas",
   "version": "0.1.0",
+  "author": "Yogesh Rathod",
+  "description": "Rest client for developers",
   "private": true,
   "main": "electron/main.js",
   "dependencies": {
@@ -25,7 +27,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "PUBLIC_URL=/ croco build",
+    "build": "craco build",
     "build-electron": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
