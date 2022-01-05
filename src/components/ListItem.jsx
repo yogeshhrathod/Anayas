@@ -15,7 +15,7 @@ export default function ListItem({ item, index, removeApi, className, clickHandl
   };
 
   return (
-    <div className={`flex w-full px-2 py-1 my-1 hover:bg-red-50 hover:bg-opacity-25`} onClick={clickHandler}>
+    <div className={`flex w-full px-2 py-1 my-1 hover:bg-yellow-50 hover:bg-opacity-25`} onClick={clickHandler}>
       <div className={`inline-block w-2 rounded ${className}`} ></div>
       <div className="w-full text-white">
         {edit ? (
