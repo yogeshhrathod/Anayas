@@ -24,9 +24,16 @@ export default function Tabs({ tabs }) {
           className={`tab-item-animate rounded-md bg-purple-500 active`}
         ></span>
       </div>
-      <div>
+      <div className="m-2">
         {tabs.map((item, index) => {
-          return (selectedTab === index && item.component) || null;
+          return (
+            <div
+              key={`tab-index-${index}`}
+              className={selectedTab === index ? "block" : "hidden"}
+            >
+              {item.component}
+            </div>
+          );
         })}
       </div>
     </div>
