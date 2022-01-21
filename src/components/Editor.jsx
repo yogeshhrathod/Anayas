@@ -1,14 +1,20 @@
 import { UnControlled as CodeMirror } from "react-codemirror2";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import debounce from "lodash/debounce";
-export default function ResponseEditor({
-  response,
+export default function Editor({
+  data,
+  dataType,
+  onChange,
   readOnly,
   mode = "javascript",
   jsonValidation,
 }) {
   const [isError, setIsError] = useState(false);
-  const [value, setValue] = useState(response);
+  const [value, setValue] = useState(data);
+  useEffect(() => {
+    setValue(data);
+  }, [data]);
+  console.log({ value, data, dataType });
   const validateJson = debounce((jsonText) => {
     try {
       setIsError(false);
@@ -19,6 +25,7 @@ export default function ResponseEditor({
       setIsError(true);
     }
   }, 500);
+
   return (
     <div className="rounded border relative">
       <CodeMirror
@@ -32,6 +39,7 @@ export default function ResponseEditor({
         onChange={(editor, data, value) => {
           setValue(value);
           validateJson(value);
+          onChange && onChange(value, dataType);
         }}
       />
       <div className="absolute bottom-0 right-0 text-red-500">

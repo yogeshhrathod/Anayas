@@ -12,7 +12,11 @@ export default function Layout() {
         <Collection {...props} />
       </div>
       <div className="inline-block w-3/4">
-        { selectedRequest!==null ? <RequestEngine {...props} /> : <div>Select a request</div> }
+        {selectedRequest !== null ? (
+          <RequestEngine key={`requestEngine_${selectedRequest}`} {...props} />
+        ) : (
+          <div>Select a request</div>
+        )}
       </div>
     </div>
   );

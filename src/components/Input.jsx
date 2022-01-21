@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { API_TYPES } from "../constants";
-export default function Input({ item, sendRequest, onRequestInputChange }) {
+export default function Input({
+  item,
+  sendRequest,
+  onRequestInputChange,
+  isLoading,
+}) {
   const [request, setRequest] = useState({
     url: item.url ?? "",
     method: item.method ?? API_TYPES.GET.method,
@@ -44,8 +49,11 @@ export default function Input({ item, sendRequest, onRequestInputChange }) {
           onChange={onChangeHandler}
           autoComplete="off"
         />
-        <button className="mb-0 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none active:bg-purple-600 bg-purple-500 text-white">
-          SEND
+        <button
+          className="mb-0 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none active:bg-purple-600 bg-purple-500 text-white"
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : "Send"}
         </button>
       </div>
     </form>

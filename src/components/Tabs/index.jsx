@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import "./styles.css";
 
-export default function Tabs({ tabs }) {
-  const [selectedTab, setSelectedTab] = useState(0);
-
+export default function Tabs({
+  tabs,
+  existingSelectedTab,
+  onChange,
+  dataType,
+}) {
+  const [selectedTab, setSelectedTab] = useState(existingSelectedTab ?? 0);
+  const onClickHandler = (index) => {
+    onChange(index, dataType);
+    setSelectedTab(index);
+  };
   return (
     <div>
       <div className="flex mx-2 rounded-md bg-gray-800 relative tabs">
@@ -14,7 +22,7 @@ export default function Tabs({ tabs }) {
               className={`tabs-item w-full relative z-10 py-1 my-2 ml-2 text-center rounded-md  text-sm cursor-pointer select-none focus:outline-none text-white ${
                 index === selectedTab ? "active" : ""
               }`}
-              onClick={() => setSelectedTab(index)}
+              onClick={() => onClickHandler(index)}
             >
               {item.name}
             </button>
