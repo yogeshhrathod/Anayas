@@ -14,7 +14,6 @@ export default function Editor({
   useEffect(() => {
     setValue(data);
   }, [data]);
-  console.log({ value, data, dataType });
   const validateJson = debounce((jsonText) => {
     try {
       setIsError(false);

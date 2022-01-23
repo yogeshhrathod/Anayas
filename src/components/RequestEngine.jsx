@@ -4,19 +4,37 @@ import Editor from "./Editor";
 import { api } from "../api";
 import Tabs from "./Tabs/index";
 import KeyValueTable from "./KeyValueTable";
-export default function RequestEngine({ apiList, selectedRequest }) {
+import { getJsonFromUrl } from "../utils/common";
+export default function RequestEngine({ apiList, selectedRequestIndex }) {
+  const [selectedRequest, setSelectedRequest] = useState(
+    apiList[selectedRequestIndex]
+  );
+
   const onChange = (data, type) => {
-    apiList[selectedRequest][type] = data;
+    setSelectedRequest({ ...selectedRequest, [type]: data });
+    apiList[selectedRequestIndex][type] = data;
+  };
+
+  const onRequestInputChange = (input) => {
+    const { url } = input;
+    const params = getJsonFromUrl(url);
+    let paramsObj = {};
+    if (Object.keys(params).length) {
+      paramsObj = { params: params };
+    }
+    const updatedRequest = { ...selectedRequest, ...input, ...paramsObj };
+    setSelectedRequest(updatedRequest);
+    apiList[selectedRequestIndex] = updatedRequest;
   };
 
   const tabsInfo = [
     {
       name: "Param",
       component: (
-        <div key="{'params'}">
+        <div key="params">
           <KeyValueTable
             onChange={onChange}
-            data={apiList[selectedRequest].params}
+            data={selectedRequest.params}
             dataType="params"
           />
         </div>
@@ -28,7 +46,7 @@ export default function RequestEngine({ apiList, selectedRequest }) {
         <div key="header">
           <KeyValueTable
             onChange={onChange}
-            data={apiList[selectedRequest].header}
+            data={selectedRequest.header}
             dataType="header"
           />
         </div>
@@ -40,7 +58,7 @@ export default function RequestEngine({ apiList, selectedRequest }) {
         <Editor
           key="body"
           onChange={onChange}
-          data={apiList[selectedRequest].body}
+          data={selectedRequest.body}
           jsonValidation={true}
           dataType="body"
         />
@@ -52,7 +70,7 @@ export default function RequestEngine({ apiList, selectedRequest }) {
         <Editor
           key="pre-script"
           onChange={onChange}
-          data={apiList[selectedRequest].preScript}
+          data={selectedRequest.preScript}
           dataType="preScript"
         />
       ),
@@ -63,14 +81,14 @@ export default function RequestEngine({ apiList, selectedRequest }) {
         <Editor
           key="pre-script"
           onChange={onChange}
-          data={apiList[selectedRequest].postScript}
+          data={selectedRequest.postScript}
           dataType="postScript"
         />
       ),
     },
   ];
 
-  const [response, setResponse] = useState(apiList[selectedRequest].response);
+  const [response, setResponse] = useState(selectedRequest.response);
   const [isLoading, setIsLoading] = useState(false);
 
   const sendRequest = async ({ method, url }) => {
@@ -79,14 +97,10 @@ export default function RequestEngine({ apiList, selectedRequest }) {
       const { data } = await api(method, url, {});
       setIsLoading(false);
       setResponse(data);
-      apiList[selectedRequest].response = data;
+      selectedRequest.response = data;
     } catch (error) {
       setIsLoading(false);
     }
-  };
-
-  const onRequestInputChange = (input) => {
-    apiList[selectedRequest] = { ...apiList[selectedRequest], ...input };
   };
 
   return (
@@ -94,23 +108,23 @@ export default function RequestEngine({ apiList, selectedRequest }) {
       <div className="px-3 py-3 bg-gray-900">
         <Input
           isLoading={isLoading}
-          key={`input_${selectedRequest}`}
-          item={apiList[selectedRequest]}
+          key={`input_${selectedRequestIndex}`}
+          item={selectedRequest}
           onRequestInputChange={onRequestInputChange}
           sendRequest={sendRequest}
         />
       </div>
       <div className="flex flex-col">
         <Tabs
-          key={`tabs_${selectedRequest}`}
-          existingSelectedTab={apiList[selectedRequest].selectedTabIndex}
+          key={`tabs_${selectedRequestIndex}`}
+          existingSelectedTab={selectedRequest.selectedTabIndex}
           tabs={tabsInfo}
           onChange={onChange}
           dataType={"selectedTabIndex"}
         />
       </div>
       <div className="m-2">
-        <div>Response</div>
+        <div className="dark:text-white">Response</div>
         <Editor key={`response`} dataType="response" data={response} />
       </div>
     </>

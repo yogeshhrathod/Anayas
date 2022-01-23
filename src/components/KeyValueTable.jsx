@@ -1,9 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function KeyValueTable({ data, onChange, dataType }) {
+  const preProcessData = (data) => {
+    return Object.entries(data || {})
+      .map((keyVal) => ({
+        key: keyVal[0],
+        value: keyVal[1],
+      }))
+      .concat([{ key: "", value: "" }]);
+  };
+
+  const postProcessData = (data) => {
+    data = data.filter((item) => item.key !== "" || item.value !== "");
+    return data.reduce((obj, params) => {
+      return { ...obj, [params.key]: params.value };
+    }, {});
+  };
   const [dictionary, setDictionary] = useState(
-    data ? [...data, { key: "", value: "" }] : [{ key: "", value: "" }]
+    data
+      ? [...preProcessData(data), { key: "", value: "" }]
+      : [{ key: "", value: "" }]
   );
+
+  useEffect(() => {
+    if (data) setDictionary(preProcessData(data));
+  }, [data]);
 
   const onChangeHandler = (index, value, type) => {
     let newDictionay = [...dictionary];
@@ -17,18 +38,15 @@ export default function KeyValueTable({ data, onChange, dataType }) {
     }
 
     setDictionary(newDictionay);
-    onChange(
-      newDictionay.filter((item) => item.key !== "" || item.value !== ""),
-      dataType
-    );
+    onChange(postProcessData(dictionary), dataType);
   };
   return (
     <div>
       <table className="w-full border-collapse">
         <thead>
           <tr>
-            <th>Key</th>
-            <th>Value</th>
+            <th className="dark:text-white">Key</th>
+            <th className="dark:text-white">Value</th>
           </tr>
         </thead>
         <tbody>
@@ -37,7 +55,7 @@ export default function KeyValueTable({ data, onChange, dataType }) {
               <td className="w-1/2">
                 <input
                   key={`key-${index}`}
-                  className="w-full rounded"
+                  className="w-full rounded dark:bg-gray-700 dark:text-white"
                   type="text"
                   value={item.key}
                   onChange={(e) =>
@@ -48,7 +66,7 @@ export default function KeyValueTable({ data, onChange, dataType }) {
               <td className="w-1/2">
                 <input
                   key={`value-${index}`}
-                  className="w-full rounded"
+                  className="w-full rounded dark:bg-gray-700 dark:text-white"
                   type="text"
                   value={item.value}
                   onChange={(e) =>

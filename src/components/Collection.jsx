@@ -4,8 +4,8 @@ import ListItem from "./ListItem";
 export default function Collection({
   apiList,
   setApiList,
-  selectedRequest,
-  setSelectedRequest,
+  selectedRequestIndex,
+  setSelectedRequestIndex,
 }) {
   const handleOnAdd = () => {
     setApiList((existing) => [...existing, {}]);
@@ -30,14 +30,16 @@ export default function Collection({
       <div>
         {apiList.map((item, index) => (
           <ListItem
-            className={`${index === selectedRequest ? "bg-yellow-500" : ""}`}
+            className={`${
+              index === selectedRequestIndex ? "bg-yellow-500" : ""
+            }`}
             key={`list-item-${index}`}
             item={item}
             index={index}
             removeApi={handleRemove}
-            selectedRequest={selectedRequest}
-            setSelectedRequest={setSelectedRequest}
-            clickHandler={() => setSelectedRequest(index)}
+            selectedRequestIndex={selectedRequestIndex}
+            setSelectedRequestIndex={setSelectedRequestIndex}
+            clickHandler={() => setSelectedRequestIndex(index)}
           />
         ))}
       </div>

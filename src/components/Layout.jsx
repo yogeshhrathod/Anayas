@@ -4,16 +4,24 @@ import RequestEngine from "./RequestEngine";
 
 export default function Layout() {
   const [apiList, setApiList] = useState([]);
-  const [selectedRequest, setSelectedRequest] = useState(null);
-  const props = { apiList, setApiList, selectedRequest, setSelectedRequest };
+  const [selectedRequestIndex, setSelectedRequestIndex] = useState(null);
+  const props = {
+    apiList,
+    setApiList,
+    selectedRequestIndex,
+    setSelectedRequestIndex,
+  };
   return (
     <div className="flex bg-gray-900">
       <div className="w-1/4 border-r">
         <Collection {...props} />
       </div>
       <div className="inline-block w-3/4">
-        {selectedRequest !== null ? (
-          <RequestEngine key={`requestEngine_${selectedRequest}`} {...props} />
+        {selectedRequestIndex !== null ? (
+          <RequestEngine
+            key={`requestEngine_${selectedRequestIndex}`}
+            {...props}
+          />
         ) : (
           <div>Select a request</div>
         )}
