@@ -2,7 +2,7 @@
   "name": "anayas",
   "version": "0.1.0",
   "author": "Yogesh Rathod",
-  "description": "Rest client for developers",
+  "description": "Rest client for developers to make life easy",
   "private": true,
   "main": "electron/main.js",
   "dependencies": {
