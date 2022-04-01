@@ -12,4 +12,4 @@
 
 
 # Target Wireframe :point_right: [Figma link](https://www.figma.com/file/PxEnhM9ntrPhQo9wkoC8Ay/Anayas)
-# Download Anayas setup to try it on local.
+# Download Anayas setup to try [Download](Anayas%20Setup%200.1.0.exe).
